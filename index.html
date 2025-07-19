@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Miraii - Home</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    fontFamily: {
+                        "inter": ["Inter", "system-ui", "sans-serif"],
+                    },
+
+                    colors: {
+                        dark: {
+                            50: "#f8fafc",
+                            100: "#f1f5f9",
+                            200: "#e2e8f0",
+                            300: "#cbd5e1",
+                            400: "#94a3b8",
+                            500: "#64748b",
+                            600: "#475569",
+                            700: "#334155",
+                            800: "#1e293b",
+                            900: "#0f172a",
+                            950: "#020617"
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(24, 24, 27, 0.95);
+            backdrop-filter: blur(16px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+        }
+
+        .loading-screen.fade-out {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loading-logo {
+            font-size: 3rem;
+            font-weight: 300;
+            color: rgb(244, 244, 245);
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.3s forwards;
+        }
+
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(82, 82, 91, 0.3);
+            border-top: 3px solid rgb(244, 244, 245);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 1.5rem;
+        }
+
+        .loading-text {
+            color: rgb(161, 161, 170);
+            font-size: 0.875rem;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 0.6s forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(24, 24, 27, 0.4);
+            border-radius: 6px;
+            margin: 2px 0;
+            border: 1px solid rgba(82, 82, 91, 0.3);
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, rgba(63, 63, 70, 0.9) 0%, rgba(82, 82, 91, 0.8) 100%);
+            border-radius: 6px;
+            border: 1px solid rgba(24, 24, 27, 0.4);
+            transition: all 0.2s ease;
+            min-height: 30px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, rgba(82, 82, 91, 0.95) 0%, rgba(113, 113, 122, 0.9) 100%);
+            transform: scaleX(1.05);
+            border-color: rgba(24, 24, 27, 0.5);
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb:active {
+            background: linear-gradient(180deg, rgba(113, 113, 122, 0.95) 0%, rgba(148, 163, 184, 0.9) 100%);
+            transform: scaleX(1.1);
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-corner {
+            background: rgba(24, 24, 27, 0.4);
+            border-radius: 6px;
+        }
+
+        .custom-scrollbar {
+            scrollbar-width: thin;
+            scrollbar-color: rgba(82, 82, 91, 0.8) rgba(24, 24, 27, 0.4);
+        }
+
+        ::selection {
+            background: rgba(59, 130, 246, 0.3);
+            color: rgb(212, 212, 212);
+        }
+
+        ::-moz-selection {
+            background: rgba(59, 130, 246, 0.3);
+            color: rgb(212, 212, 212);
+        }
+
+        .context-menu-item {
+            display: flex;
+            align-items: center;
+            padding: 8px 16px;
+            color: rgb(212, 212, 212);
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            user-select: none;
+            border-radius: 6px;
+            margin: 2px 8px;
+        }
+
+        .context-menu-item:hover {
+            background-color: rgba(59, 130, 246, 0.2);
+        }
+
+        .context-menu-divider {
+            height: 1px;
+            background-color: rgba(82, 82, 91, 0.5);
+            margin: 4px 0;
+        }
+
+        .notification {
+            background: rgba(24, 24, 27, 0.95);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(82, 82, 91, 0.4);
+            border-radius: 12px;
+            padding: 12px 16px;
+            min-width: 300px;
+            max-width: 380px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+            transform: translateX(100%);
+            opacity: 0;
+            animation: slideInNotification 0.3s ease-out forwards;
+            position: relative;
+        }
+
+        .notification.success {
+            border-color: rgba(34, 197, 94, 0.6);
+            background: rgba(6, 78, 59, 0.95);
+            box-shadow: 0 12px 40px rgba(34, 197, 94, 0.1);
+        }
+
+        .notification.error {
+            border-color: rgba(239, 68, 68, 0.6);
+            background: rgba(69, 10, 10, 0.95);
+            box-shadow: 0 12px 40px rgba(239, 68, 68, 0.1);
+        }
+
+        .notification.info {
+            border-color: rgba(59, 130, 246, 0.6);
+            background: rgba(30, 58, 138, 0.95);
+            box-shadow: 0 12px 40px rgba(59, 130, 246, 0.1);
+        }
+
+        .notification.warning {
+            border-color: rgba(245, 158, 11, 0.6);
+            background: rgba(120, 53, 15, 0.95);
+            box-shadow: 0 12px 40px rgba(245, 158, 11, 0.1);
+        }
+
+        @keyframes slideInNotification {
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOutNotification {
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+
+        .notification.slide-out {
+            animation: slideOutNotification 0.3s ease-in forwards;
+        }
+
+        .notification-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .notification-text {
+            color: rgb(244, 244, 245);
+            font-size: 14px;
+            line-height: 1.5;
+            flex: 1;
+            font-weight: 500;
+        }
+
+        .notification-close {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: rgb(244, 244, 245);
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+        }
+
+        .notification-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.3);
+            color: rgb(255, 255, 255);
+            transform: scale(1.05);
+        }
+
+        .notification-icon {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+
+<body class="text-zinc-200 min-h-screen flex flex-col"
+    style="background-image: url('https://images.guns.lol/8nabn.jpg'); background-size: cover; background-position: center; background-attachment: fixed;">
+
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-logo">Miraii</div>
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Loading...</div>
+    </div>
+
+    <div class="main_content" id="main_content">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+
+        <main class="relative z-10 flex-grow container mx-auto px-6 py-16" style="width: 800px; height: 600px;">
+            <section class="max-w-5xl mx-auto">
+                <div class="text-center mb-12">
+                    <h1 class="text-5xl font-light text-white mb-4">Miraii</h1>
+                    <p class="text-xl text-zinc-300">Welcome I Guess..!!</p>
+                </div>
+
+                <div
+                    class="bg-zinc-900/90 backdrop-blur-md border border-zinc-700 rounded-lg shadow-2xl overflow-hidden">
+                    <div class="bg-zinc-800/70 border-b border-zinc-700 px-6 py-3 flex items-center justify-between">
+                        <div class="flex items-center space-x-2">
+                            <div
+                                class="w-3 h-3 rounded-full bg-red-400 shadow-sm hover:bg-red-300 transition-colors cursor-pointer relative group">
+                                <div
+                                    class="absolute -top-1 -left-1 w-5 h-5 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                                    <svg class="w-3 h-3 text-red-700" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </div>
+                            </div>
+
+                            <div
+                                class="w-3 h-3 rounded-full bg-yellow-400 shadow-sm hover:bg-yellow-300 transition-colors cursor-pointer relative group">
+                                <div
+                                    class="absolute -top-1 -left-1 w-5 h-5 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                                    <svg class="w-3 h-3 text-yellow-700" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </div>
+                            </div>
+
+                            <div
+                                class="w-3 h-3 rounded-full bg-green-400 shadow-sm hover:bg-green-300 transition-colors cursor-pointer relative group">
+                                <div
+                                    class="absolute -top-1 -left-1 w-5 h-5 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                                    <svg class="w-3 h-3 text-green-700" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex-1 text-center">
+                            <svg class="w-4 h-4 text-zinc-300 mx-auto" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M21 2H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h7l-2 3v1h8v-1l-2-3h7c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 12H3V4h18v10z" />
+                            </svg>
+                        </div>
+
+                        <div class="w-16"></div>
+                    </div>
+
+                    <div class="p-8 overflow-y-auto max-h-96 scroll-smooth custom-scrollbar">
+                        <div class="max-w-3xl mx-auto">
+                            <div class="mb-8">
+                                <h2 class="text-lg font-medium text-white mb-4">About Meh</h2>
+
+                                <p class="text-zinc-300 leading-relaxed mb-4">
+                                    I'm a passionate developer who loves creating innovative solutions and exploring
+                                    new technologies.
+                                    With expertise in multiple programming languages, I enjoy building everything
+                                    from web applications
+                                    to system-level software.
+                                </p>
+
+                                <p class="text-zinc-300 leading-relaxed">
+                                    When I'm not coding, you can find me learning new frameworks, contributing to
+                                    open-source projects,
+                                    or sharing knowledge with the developer community. I believe in writing clean,
+                                    efficient code and
+                                    creating user experiences that make a difference.
+                                </p>
+                                <p class="text-xs text-zinc-500 mt-2">thanks chatgpt for the about me ;)</p>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                                <div
+                                    class="bg-zinc-800/50 backdrop-blur-md border border-zinc-600 rounded-lg p-4 hover:border-zinc-500 transition-all duration-300">
+                                    <div
+                                        class="w-8 h-8 bg-gradient-to-br from-blue-500/30 to-yellow-400/30 rounded-lg flex items-center justify-center mb-3">
+                                        <svg class="w-4 h-4" viewBox="0 0 128 128" fill="currentColor">
+                                            <linearGradient id="python-original-a" gradientUnits="userSpaceOnUse"
+                                                x1="70.252" y1="1237.476" x2="170.659" y2="1151.089"
+                                                gradientTransform="matrix(.563 0 0 -.568 -29.215 707.817)">
+                                                <stop offset="0" stop-color="#5A9FD4" />
+                                                <stop offset="1" stop-color="#306998" />
+                                            </linearGradient>
+
+                                            <linearGradient id="python-original-b" gradientUnits="userSpaceOnUse"
+                                                x1="209.474" y1="1098.811" x2="173.62" y2="1149.537"
+                                                gradientTransform="matrix(.563 0 0 -.568 -29.215 707.817)">
+                                                <stop offset="0" stop-color="#FFD43B" />
+                                                <stop offset="1" stop-color="#FFE873" />
+                                            </linearGradient>
+
+                                            <path fill="url(#python-original-a)"
+                                                d="M63.391 1.988c-4.222.02-8.252.379-11.8 1.007-10.45 1.846-12.346 5.71-12.346 12.837v9.411h24.693v3.137H29.977c-7.176 0-13.46 4.313-15.426 12.521-2.268 9.405-2.368 15.275 0 25.096 1.755 7.311 5.947 12.519 13.124 12.519h8.491V67.234c0-8.151 7.051-15.34 15.426-15.34h24.665c6.866 0 12.346-5.654 12.346-12.548V15.833c0-6.693-5.646-11.72-12.346-12.837-4.244-.706-8.645-1.027-12.866-1.008zM50.037 9.557c2.55 0 4.634 2.117 4.634 4.721 0 2.593-2.083 4.69-4.634 4.69-2.56 0-4.633-2.097-4.633-4.69-.001-2.604 2.073-4.721 4.633-4.721z"
+                                                transform="translate(0 10.26)" />
+                                            <path fill="url(#python-original-b)"
+                                                d="M91.682 28.38v10.966c0 8.5-7.208 15.655-15.426 15.655H51.591c-6.756 0-12.346 5.783-12.346 12.549v23.515c0 6.691 5.818 10.628 12.346 12.547 7.816 2.297 15.312 2.713 24.665 0 6.216-1.801 12.346-5.423 12.346-12.547v-9.412H63.938v-3.138h37.012c7.176 0 9.852-5.005 12.348-12.519 2.578-7.735 2.467-15.174 0-25.096-1.774-7.145-5.161-12.521-12.348-12.521h-9.268zM77.809 87.927c2.561 0 4.634 2.097 4.634 4.692 0 2.602-2.074 4.719-4.634 4.719-2.55 0-4.633-2.117-4.633-4.719 0-2.595 2.083-4.692 4.633-4.692z"
+                                                transform="translate(0 10.26)" />
+                                        </svg>
+                                    </div>
+
+                                    <h3 class="text-sm font-medium text-white mb-1">Python</h3>
+                                    <p class="text-xs text-zinc-400">Servers, Web development</p>
+                                </div>
+
+                                <div
+                                    class="bg-zinc-800/50 backdrop-blur-md border border-zinc-600 rounded-lg p-4 hover:border-zinc-500 transition-all duration-300">
+                                    <div
+                                        class="w-8 h-8 bg-blue-600/20 rounded-lg flex items-center justify-center mb-3">
+                                        <svg class="w-4 h-4" viewBox="0 0 128 128" fill="currentColor">
+                                            <path fill="#00599c"
+                                                d="M118.766 95.82c.89-1.543 1.441-3.28 1.441-4.843V36.78c0-1.558-.55-3.297-1.441-4.84l-55.32 31.94Zm0 0" />
+                                            <path fill="#004482"
+                                                d="m68.36 126.586 46.933-27.094c1.352-.781 2.582-2.129 3.473-3.672l-55.32-31.94L8.12 95.82c.89 1.543 2.121 2.89 3.473 3.672l46.933 27.094c2.703 1.562 7.13 1.562 9.832 0Zm0 0" />
+                                            <path fill="#659ad2"
+                                                d="M118.766 31.941c-.891-1.546-2.121-2.894-3.473-3.671L68.359 1.172c-2.703-1.563-7.129-1.563-9.832 0L11.594 28.27C8.89 29.828 6.68 33.66 6.68 36.78v54.196c0 1.562.55 3.3 1.441 4.843L63.445 63.88Zm0 0" />
+                                            <path fill="#fff"
+                                                d="M63.445 26.035c-20.867 0-37.843 16.977-37.843 37.844s16.976 37.844 37.843 37.844c13.465 0 26.024-7.247 32.77-18.91L79.84 73.335c-3.38 5.84-9.66 9.465-16.395 9.465-10.433 0-18.922-8.488-18.922-18.922 0-10.434 8.49-18.922 18.922-18.922 6.73 0 13.017 3.629 16.39 9.465l16.38-9.477c-6.75-11.664-19.305-18.91-32.77-18.91zM92.88 57.57v4.207h-4.207v4.203h4.207v4.207h4.203V65.98h4.203v-4.203h-4.203V57.57H92.88zm15.766 0v4.207h-4.204v4.203h4.204v4.207h4.207V65.98h4.203v-4.203h-4.203V57.57h-4.207z" />
+                                        </svg>
+                                    </div>
+
+                                    <h3 class="text-sm font-medium text-white mb-1">C++</h3>
+                                    <p class="text-xs text-zinc-400">Random Ass Programs</p>
+                                </div>
+
+                                <div
+                                    class="bg-zinc-800/50 backdrop-blur-md border border-zinc-600 rounded-lg p-4 hover:border-zinc-500 transition-all duration-300">
+                                    <div
+                                        class="w-8 h-8 bg-orange-500/20 rounded-lg flex items-center justify-center mb-3">
+                                        <svg class="w-4 h-4" viewBox="0 0 128 128" fill="currentColor">
+                                            <path fill="#E44D26"
+                                                d="M19.037 113.876L9.032 1.661h109.936l-10.016 112.198-45.019 12.48z" />
+                                            <path fill="#F16529" d="M64 116.8l36.378-10.086 8.559-95.878H64z" />
+                                            <path fill="#EBEBEB"
+                                                d="M64 52.455H45.788L44.53 38.361H64V24.599H29.489l.33 3.692 3.382 37.927H64zm0 35.743l-.061.017-15.327-4.14-.979-10.975H33.816l1.928 21.609 28.193 7.826.063-.017z" />
+                                            <path fill="#fff"
+                                                d="M63.952 52.455v13.763h16.947l-1.597 17.849-15.35 4.143v14.319l28.215-7.82.207-2.325 3.234-36.233.335-3.696h-3.708zm0-27.856v13.762h33.244l.276-3.092.628-6.978.329-3.692z" />
+                                        </svg>
+                                    </div>
+
+                                    <h3 class="text-sm font-medium text-white mb-1">HTML & CSS</h3>
+                                    <p class="text-xs text-zinc-400">Websites</p>
+                                </div>
+
+                                <div
+                                    class="bg-zinc-800/50 backdrop-blur-md border border-zinc-600 rounded-lg p-4 hover:border-zinc-500 transition-all duration-300">
+                                    <div
+                                        class="w-8 h-8 bg-yellow-500/20 rounded-lg flex items-center justify-center mb-3">
+                                        <svg class="w-4 h-4" viewBox="0 0 128 128" fill="currentColor">
+                                            <path fill="#F0DB4F" d="M1.408 1.408h125.184v125.185H1.408z" />
+                                            <path fill="#323330"
+                                                d="M116.347 96.736c-.917-5.711-4.641-10.508-15.672-14.981-3.832-1.761-8.104-3.022-9.377-5.926-.452-1.69-.512-2.642-.226-3.665.821-3.32 4.784-4.355 7.925-3.403 2.023.678 3.938 2.237 5.093 4.724 5.402-3.498 5.391-3.475 9.163-5.879-1.381-2.141-2.118-3.129-3.022-4.045-3.249-3.629-7.676-5.498-14.756-5.355l-3.688.477c-3.534.893-6.902 2.748-8.877 5.235-5.926 6.724-4.236 18.492 2.975 23.335 7.104 5.332 17.54 6.545 18.873 11.531 1.297 6.104-4.486 8.08-10.234 7.378-4.236-.881-6.592-3.034-9.139-6.949-4.688 2.713-4.688 2.713-9.508 5.485 1.143 2.499 2.344 3.63 4.26 5.795 9.068 9.198 31.76 8.746 35.83-5.176.165-.478 1.261-3.666.38-8.581zM69.462 58.943H57.753l-.048 30.272c0 6.438.333 12.34-.714 14.149-1.713 3.558-6.152 3.117-8.175 2.427-2.059-1.012-3.106-2.451-4.319-4.485-.333-.584-.583-1.036-.667-1.071l-9.52 5.83c1.583 3.249 3.915 6.069 6.902 7.901 4.462 2.678 10.459 3.499 16.731 2.059 4.082-1.189 7.604-3.652 9.448-7.401 2.666-4.915 2.094-10.864 2.07-17.444.06-10.735.001-21.468.001-32.237z" />
+                                        </svg>
+                                    </div>
+
+                                    <h3 class="text-sm font-medium text-white mb-1">JavaScript</h3>
+                                    <p class="text-xs text-zinc-400">Discord Bots, Servers, <em>*winks*</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border-t border-zinc-700 bg-zinc-800/30 px-6 py-3">
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center space-x-4 text-zinc-500 text-sm">
+                                <p>&copy; 2025 Miraii</p>
+                                <button onclick="open_credits_modal()"
+                                    class="px-3 py-1 bg-zinc-800/50 hover:bg-zinc-700/50 border border-zinc-600 hover:border-zinc-500 rounded-md text-zinc-400 hover:text-zinc-200 transition-all duration-200 text-sm font-medium">
+                                    Credits
+                                </button>
+                            </div>
+
+                            <div class="flex items-center space-x-3">
+                                <a href="https://github.com/mir4ii" target="_blank"
+                                    class="text-zinc-500 hover:text-zinc-300 transition-colors">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                        <path
+                                            d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                                    </svg>
+                                </a>
+
+                                <a href="mailto:miraii.contact.mail@gmail.com"
+                                    class="text-zinc-500 hover:text-zinc-300 transition-colors">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                        <path
+                                            d="M0 3v18h24V3H0zm21.518 2L12 12.713 2.482 5h19.036zM2 19V7.183l10 8.104 10-8.104V19H2z" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div id="context-menu"
+        class="fixed hidden bg-zinc-800/95 backdrop-blur-md border border-zinc-700 rounded-lg shadow-2xl py-2 min-w-48 z-50">
+        <div class="context-menu-item" onclick="copy_text()">
+            <svg class="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z">
+                </path>
+            </svg>
+
+            Copy
+        </div>
+
+        <div class="context-menu-item" onclick="select_all()">
+            <svg class="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
+            </svg>
+
+            Select All
+        </div>
+
+        <div class="context-menu-divider"></div>
+        <div class="context-menu-item" onclick="open_in_new_tab()">
+            <svg class="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+            </svg>
+
+            Open in New Tab
+        </div>
+
+        <div class="context-menu-item" onclick="inspect_element()">
+            <svg class="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z">
+                </path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            </svg>
+
+            Inspect Element
+        </div>
+    </div>
+
+    <div id="notifications-container" class="fixed top-4 right-4 z-50 space-y-3"></div>
+
+    <div id="credits-modal"
+        class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center">
+        <div
+            class="bg-zinc-900/95 backdrop-blur-md border border-zinc-700 rounded-lg shadow-2xl max-w-2xl w-full mx-4 max-h-[80vh] overflow-hidden">
+            <div class="bg-zinc-800/70 border-b border-zinc-700 px-6 py-4 flex items-center justify-between">
+                <h2 class="text-lg font-medium text-white">Credits</h2>
+                <button onclick="close_credits_modal()" class="text-zinc-400 hover:text-white transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="p-6 overflow-y-auto max-h-96 custom-scrollbar">
+                <div class="text-zinc-300 space-y-4">
+                    <div class="space-y-2">
+                        <h3 class="text-lg font-medium text-white mb-3">Icons & Resources</h3>
+                        <div class="bg-zinc-800/50 rounded-lg p-4 border border-zinc-600">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-3">
+                                    <img src="https://techicons.dev/tech-icons-logo.svg" alt="TechIcons"
+                                        class="w-6 h-6">
+                                    <div>
+                                        <h4 class="text-sm font-medium text-white">TechIcons</h4>
+                                        <p class="text-xs text-zinc-400 mt-1">For Many Of The Icons, Thanks!!</p>
+                                    </div>
+                                </div>
+                                <a href="https://techicons.dev" target="_blank"
+                                    class="text-blue-400 hover:text-blue-300 text-sm font-medium transition-colors">
+                                    TechIcons.dev
+                                </a>
+                            </div>
+                        </div>
+                        <div class="bg-zinc-800/50 rounded-lg p-4 border border-zinc-600">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-3">
+                                    <svg class="w-6 h-6 text-blue-400" viewBox="0 0 128 128" fill="currentColor">
+                                        <path
+                                            d="M64.004 25.602c-17.067 0-27.73 8.53-32 25.597 6.398-8.531 13.867-11.73 22.398-9.597 4.871 1.214 8.352 4.746 12.207 8.66C72.883 56.629 80.145 64 96.004 64c17.066 0 27.73-8.531 32-25.602-6.399 8.536-13.867 11.735-22.399 9.602-4.87-1.215-8.347-4.746-12.207-8.66-6.27-6.367-13.53-13.738-29.394-13.738zM32.004 64c-17.066 0-27.73 8.531-32 25.602C6.402 81.066 13.87 77.867 22.402 80c4.871 1.215 8.352 4.746 12.207 8.66 6.274 6.367 13.536 13.738 29.395 13.738 17.066 0 27.73-8.53 32-25.597-6.399 8.531-13.867 11.73-22.399 9.597-4.87-1.214-8.347-4.746-12.207-8.66C55.128 71.371 47.868 64 32.004 64zm0 0"
+                                            fill="#38bdf8" />
+                                    </svg>
+                                    <div>
+                                        <h4 class="text-sm font-medium text-white">CSS Framework</h4>
+                                        <p class="text-xs text-zinc-400 mt-1">Best CSS Framework For UI</p>
+                                    </div>
+                                </div>
+                                <a href="https://tailwindcss.com" target="_blank"
+                                    class="text-blue-400 hover:text-blue-300 text-sm font-medium transition-colors">
+                                    Tailwind CSS
+                                </a>
+                            </div>
+                        </div>
+                        <div class="bg-zinc-800/50 rounded-lg p-4 border border-zinc-600">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-3">
+                                    <svg class="w-6 h-6 text-gray-400" viewBox="0 0 24 24" fill="currentColor">
+                                        <path
+                                            d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+                                    </svg>
+                                    <div>
+                                        <h4 class="text-sm font-medium text-white">UI Inspiration</h4>
+                                        <p class="text-xs text-zinc-400 mt-1">For The MacOS Style Inspiration</p>
+                                    </div>
+                                </div>
+                                <a href="https://www.apple.com" target="_blank"
+                                    class="text-blue-400 hover:text-blue-300 text-sm font-medium transition-colors">
+                                    Apple
+                                </a>
+                            </div>
+                        </div>
+                        <div class="bg-zinc-800/50 rounded-lg p-4 border border-zinc-600">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-3">
+                                    <img src="https://images.guns.lol/wgdJi.webp" alt="guns.lol"
+                                        class="w-6 h-6 rounded-full">
+                                    <div>
+                                        <h4 class="text-sm font-medium text-white">Image Hosting</h4>
+                                        <p class="text-xs text-zinc-400 mt-1">For Hosting Some Icons & Images</p>
+                                    </div>
+                                </div>
+                                <a href="https://guns.lol" target="_blank"
+                                    class="text-blue-400 hover:text-blue-300 text-sm font-medium transition-colors">
+                                    guns.lol
+                                </a>
+                            </div>
+                        </div>
+                        <div class="bg-zinc-800/50 rounded-lg p-4 border border-zinc-600">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-3">
+                                    <img src="https://lucide.dev/logo.dark.svg" alt="Lucide" class="w-6 h-6">
+                                    <div>
+                                        <h4 class="text-sm font-medium text-white">Lucide Icons</h4>
+                                        <p class="text-xs text-zinc-400 mt-1">For The Beautiful Icons Used In UI</p>
+                                    </div>
+                                </div>
+                                <a href="https://lucide.dev" target="_blank"
+                                    class="text-blue-400 hover:text-blue-300 text-sm font-medium transition-colors">
+                                    Lucide
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-2 mt-6">
+                        <h3 class="text-lg font-medium text-white mb-3">Special Thanks</h3>
+                        <div class="bg-zinc-800/50 rounded-lg p-4 border border-zinc-600">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-3">
+                                    <img src="https://images.guns.lol/ciZSY.webp" alt="q_im"
+                                        class="w-6 h-6 rounded-full">
+                                    <div>
+                                        <h4 class="text-sm font-medium text-white">UI Rate</h4>
+                                        <p class="text-xs text-zinc-400 mt-1">For Helping Me With UI & Rate, Thanks!! :D
+                                        </p>
+                                    </div>
+                                </div>
+                                <span
+                                    class="text-purple-400 hover:text-purple-300 text-sm font-medium transition-colors">
+                                    q_im
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        let selected_text = "";
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const loadingScreen = document.getElementById("loading-screen");
+            const mainContent = document.getElementById("main_content");
+
+            // Hide main content initially
+            mainContent.style.opacity = "0";
+            mainContent.style.transition = "opacity 0.5s ease-in";
+
+            // Simulate loading time and ensure everything is ready
+            setTimeout(() => {
+                // Fade out loading screen
+                loadingScreen.classList.add("fade-out");
+
+                // Show main content
+                mainContent.style.opacity = "1";
+
+                // Remove loading screen from DOM after animation
+                setTimeout(() => {
+                    loadingScreen.remove();
+                }, 500);
+            }, 2000); // 2 second loading time
+        });
+        document.addEventListener("contextmenu", function (e) {
+            e.preventDefault();
+
+            const context_menu = document.getElementById("context-menu");
+            const selection = window.getSelection();
+
+            selected_text = selection.toString();
+            context_menu.style.left = e.pageX + "px";
+            context_menu.style.top = e.pageY + "px";
+            context_menu.classList.remove("hidden");
+
+            return false;
+        });
+
+        document.addEventListener("click", function (e) {
+            const context_menu = document.getElementById("context-menu");
+
+            if (!context_menu.contains(e.target)) {
+                context_menu.classList.add("hidden");
+            }
+        });
+
+        function copy_text() {
+            if (selected_text) {
+                navigator.clipboard.writeText(selected_text).then(() => {
+                    show_notification("Text copied to clipboard!", "success");
+                }).catch(() => {
+                    show_notification("Failed to copy text", "error");
+                });
+            }
+
+            hide_context_menu();
+        }
+
+        function select_all() {
+            const content = document.querySelector(".max-w-3xl");
+            const range = document.createRange();
+
+            range.selectNodeContents(content);
+
+            const selection = window.getSelection();
+
+            selection.removeAllRanges();
+            selection.addRange(range);
+            hide_context_menu();
+        }
+
+        function open_in_new_tab() {
+            window.open(window.location.href, "_blank");
+            hide_context_menu();
+        }
+
+        function inspect_element() {
+            console.log("Inspect element clicked");
+            hide_context_menu();
+        }
+
+        function hide_context_menu() {
+            document.getElementById("context-menu").classList.add("hidden");
+        }
+
+        function show_notification(message, type = "info", duration = 4000) {
+            const container = document.getElementById("notifications-container");
+            const notification = document.createElement("div");
+
+            notification.className = `notification ${type}`;
+
+            const icons = {
+                success: `<i data-lucide="check-circle" class="notification-icon" style="color: rgb(74, 222, 128);"></i>`,
+                error: `<i data-lucide="x-circle" class="notification-icon" style="color: rgb(248, 113, 113);"></i>`,
+                info: `<i data-lucide="info" class="notification-icon" style="color: rgb(96, 165, 250);"></i>`,
+                warning: `<i data-lucide="alert-triangle" class="notification-icon" style="color: rgb(251, 191, 36);"></i>`
+            };
+
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <div class="notification-icon">
+                        ${icons[type] || icons.info}
+                    </div>
+                    <span class="notification-text">${message}</span>
+                    <button class="notification-close" onclick="close_notification(this)">
+                        <i data-lucide="x" style="width: 14px; height: 14px;"></i>
+                    </button>
+                </div>
+            `;
+
+            container.appendChild(notification);
+            lucide.createIcons();
+
+            if (duration > 0) {
+                setTimeout(() => {
+                    close_notification(notification.querySelector(".notification-close"));
+                }, duration);
+            }
+        }
+
+        function close_notification(button) {
+            const notification = button.closest(".notification");
+
+            notification.classList.add("slide-out");
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.parentNode.removeChild(notification);
+                    lucide.createIcons();
+                }
+            }, 300);
+        }
+
+        function open_credits_modal() {
+            const modal = document.getElementById("credits-modal");
+
+            modal.classList.remove("hidden");
+            modal.classList.add("flex");
+        }
+
+        function close_credits_modal() {
+            const modal = document.getElementById("credits-modal");
+
+            modal.classList.add("hidden");
+            modal.classList.remove("flex");
+        }
+
+        document.addEventListener("click", function (e) {
+            const credits_modal = document.getElementById("credits-modal");
+
+            if (e.target === credits_modal) {
+                close_credits_modal();
+            }
+        });
+    </script>
+</body>
+
+</html>
