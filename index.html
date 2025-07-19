@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Miraii - Home</title>
+    <title>Miraii</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
@@ -693,6 +693,9 @@
             const loadingScreen = document.getElementById("loading-screen");
             const mainContent = document.getElementById("main_content");
 
+            // Set loading title
+            document.title = "Miraii - Loading...";
+
             // Hide main content initially
             mainContent.style.opacity = "0";
             mainContent.style.transition = "opacity 0.5s ease-in";
@@ -704,6 +707,9 @@
 
                 // Show main content
                 mainContent.style.opacity = "1";
+
+                // Change title back to normal
+                document.title = "Miraii";
 
                 // Remove loading screen from DOM after animation
                 setTimeout(() => {
