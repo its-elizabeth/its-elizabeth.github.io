@@ -1,17 +1,31 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="jp">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elizabeth</title>
+    <title>エリザベス</title>
+
+    <meta property="og:title" content="エリザベス - 17歳の開発者">
+    <meta property="og:description"
+        content="アニメ、ゲーム、プログラミングが大好きな17歳の開発者のポートフォリオサイトです。Python、C++、HTML/CSS、JavaScriptを扱います。">
+    <meta property="og:image" content="https://images.guns.lol/JdcFg.png">
+    <meta property="og:url" content="">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="エリザベス">
+
+    <meta name="description" content="アニメ、ゲーム、プログラミングが大好きな17歳の開発者のポートフォリオサイトです。Python、C++、HTML/CSS、JavaScriptを扱います。">
+    <meta name="keywords" content="エリザベス, 開発者, プログラミング, Python, C++, HTML, CSS, JavaScript, ポートフォリオ">
+    <meta name="author" content="エリザベス">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Noto+Sans+JP:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
 
     <script>
         tailwind.config = {
@@ -20,6 +34,7 @@
                 extend: {
                     fontFamily: {
                         "inter": ["Inter", "system-ui", "sans-serif"],
+                        "noto": ["Noto Sans JP", "Inter", "system-ui", "sans-serif"],
                     },
 
                     colors: {
@@ -231,7 +246,7 @@
     </style>
 </head>
 
-<body class="text-zinc-700 min-h-screen flex flex-col"
+<body class="text-zinc-700 min-h-screen flex flex-col font-noto"
     style="background-image: url('https://images.guns.lol/8nabn.jpg'); background-size: cover; background-position: center; background-attachment: fixed;">
 
 
@@ -242,8 +257,8 @@
         <main class="relative z-10 flex-grow container mx-auto px-6 py-16" style="width: 800px; height: 600px;">
             <section class="max-w-5xl mx-auto">
                 <div class="text-center mb-12">
-                    <h1 class="text-5xl font-light text-zinc-800 mb-4">Elizabeth</h1>
-                    <p class="text-xl text-zinc-600">Welcome I Guess..!!</p>
+                    <h1 class="text-5xl font-light text-zinc-800 mb-4">エリザベス</h1>
+                    <p class="text-xl text-zinc-600">ようこそ...多分！</p>
                 </div>
 
                 <div class="bg-white/90 backdrop-blur-md border border-pink-200 rounded-lg shadow-2xl overflow-hidden">
@@ -293,17 +308,17 @@
                     <div class="p-8">
                         <div class="max-w-3xl mx-auto">
                             <div class="mb-8">
-                                <h2 class="text-lg font-medium text-zinc-800 mb-4">About Me!!</h2>
+                                <h2 class="text-lg font-medium text-zinc-800 mb-4">私について！</h2>
 
                                 <p class="text-zinc-600 leading-relaxed mb-4">
-                                    Hello, I'm Elizabeth. I'm a 17 years old developer who loves creating stuff.
-                                    I like anime, games, and programming.
-                                    My favorite animes are "Tokyo Ghoul, Shingeki no Kyojin, and One Piece".
+                                    こんにちは、私はエリザベスです。17歳の開発者で、ものづくりが大好きです。
+                                    アニメ、ゲーム、プログラミングが好きです。
+                                    好きなアニメは「東京喰種、進撃の巨人、ワンピース」です。
                                 </p>
 
                                 <p class="text-zinc-600 leading-relaxed">
-                                    When I'm not coding, you can find me learning new frameworks, contributing to
-                                    open-source projects.
+                                    コーディングしていない時は、新しいフレームワークを学んだり、
+                                    オープンソースプロジェクトに貢献しています。
                                 </p>
                             </div>
 
@@ -337,7 +352,7 @@
                                     </div>
 
                                     <h3 class="text-sm font-medium text-zinc-800 mb-1">Python</h3>
-                                    <p class="text-xs text-zinc-500">Servers, Web development</p>
+                                    <p class="text-xs text-zinc-500">サーバー、Web開発</p>
                                 </div>
 
                                 <div
@@ -376,7 +391,7 @@
                                     </div>
 
                                     <h3 class="text-sm font-medium text-zinc-800 mb-1">HTML & CSS</h3>
-                                    <p class="text-xs text-zinc-500">Websites</p>
+                                    <p class="text-xs text-zinc-500">ウェブサイト</p>
                                 </div>
 
                                 <div
@@ -391,7 +406,7 @@
                                     </div>
 
                                     <h3 class="text-sm font-medium text-zinc-800 mb-1">JavaScript</h3>
-                                    <p class="text-xs text-zinc-500">Discord Bots, Servers, <em>*winks*</em> 🎀</p>
+                                    <p class="text-xs text-zinc-500">Discordボット、サーバー、<em>*ウィンク*</em> 🎀</p>
                                 </div>
                             </div>
                         </div>
@@ -400,22 +415,22 @@
                     <div class="border-t border-pink-200 bg-zinc-50/30 px-6 py-3">
                         <div class="flex justify-between items-center">
                             <div class="flex items-center space-x-4 text-zinc-600 text-sm">
-                                <p>&copy; 2025 Elizabeth 🎀</p>
+                                <p>&copy; 2025 エリザベス 🎀</p>
                                 <span
                                     class="inline-flex items-center px-2 py-1 bg-gradient-to-r from-soft-pink/40 to-soft-rose/40 border border-pink-300/50 text-pink-700 text-xs rounded-full font-medium">
                                     <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 24 24">
                                         <path
                                             d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
                                     </svg>
-                                    Girls Can Code
+                                    女の子もコーディングできる
                                 </span>
                                 <button onclick="open_projects_modal()"
                                     class="px-3 py-1 bg-white/50 hover:bg-zinc-100/50 border border-zinc-300 hover:border-zinc-400 rounded-md text-zinc-600 hover:text-zinc-800 transition-all duration-200 text-sm font-medium">
-                                    Projects
+                                    プロジェクト
                                 </button>
                                 <button onclick="open_credits_modal()"
                                     class="px-3 py-1 bg-white/50 hover:bg-zinc-100/50 border border-zinc-300 hover:border-zinc-400 rounded-md text-zinc-600 hover:text-zinc-800 transition-all duration-200 text-sm font-medium">
-                                    Credits
+                                    クレジット
                                 </button>
                             </div>
 
@@ -452,7 +467,7 @@
                 </path>
             </svg>
 
-            Copy
+            コピー
         </div>
 
         <div class="context-menu-item" onclick="select_all()">
@@ -461,7 +476,7 @@
                     d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
             </svg>
 
-            Select All
+            すべて選択
         </div>
 
         <div class="context-menu-divider"></div>
@@ -471,7 +486,7 @@
                     d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
             </svg>
 
-            Open in New Tab
+            新しいタブで開く
         </div>
 
         <div class="context-menu-item" onclick="inspect_element()">
@@ -483,7 +498,7 @@
                     d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
             </svg>
 
-            Inspect Element
+            要素を検証
         </div>
 
         <div class="context-menu-divider"></div>
@@ -493,7 +508,7 @@
                     d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
 
-            Build Info
+            ビルド情報
         </div>
     </div>
 
@@ -504,7 +519,7 @@
         <div
             class="bg-white/95 backdrop-blur-md border border-pink-200 rounded-lg shadow-2xl max-w-2xl w-full mx-4 max-h-[80vh] overflow-hidden">
             <div class="bg-zinc-50/70 border-b border-pink-200 px-6 py-4 flex items-center justify-between">
-                <h2 class="text-lg font-medium text-zinc-800">Credits</h2>
+                <h2 class="text-lg font-medium text-zinc-800">クレジット</h2>
                 <button onclick="close_credits_modal()" class="text-zinc-600 hover:text-zinc-800 transition-colors">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
@@ -516,7 +531,7 @@
             <div class="p-6 overflow-y-auto max-h-96 custom-scrollbar">
                 <div class="text-zinc-600 space-y-4">
                     <div class="space-y-2">
-                        <h3 class="text-lg font-medium text-zinc-800 mb-3">Icons & Resources</h3>
+                        <h3 class="text-lg font-medium text-zinc-800 mb-3">アイコンとリソース</h3>
                         <div class="bg-zinc-50/50 rounded-lg p-4 border border-pink-200">
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center space-x-3">
@@ -524,7 +539,7 @@
                                         class="w-6 h-6">
                                     <div>
                                         <h4 class="text-sm font-medium text-zinc-800">TechIcons</h4>
-                                        <p class="text-xs text-zinc-500 mt-1">For Many Of The Icons, Thanks!!</p>
+                                        <p class="text-xs text-zinc-500 mt-1">多くのアイコンをありがとうございます！</p>
                                     </div>
                                 </div>
                                 <a href="https://techicons.dev" target="_blank"
@@ -542,8 +557,8 @@
                                             fill="#38bdf8" />
                                     </svg>
                                     <div>
-                                        <h4 class="text-sm font-medium text-zinc-800">CSS Framework</h4>
-                                        <p class="text-xs text-zinc-500 mt-1">Best CSS Framework For UI</p>
+                                        <h4 class="text-sm font-medium text-zinc-800">CSSフレームワーク</h4>
+                                        <p class="text-xs text-zinc-500 mt-1">UIに最適なCSSフレームワーク</p>
                                     </div>
                                 </div>
                                 <a href="https://tailwindcss.com" target="_blank"
@@ -560,8 +575,8 @@
                                             d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
                                     </svg>
                                     <div>
-                                        <h4 class="text-sm font-medium text-zinc-800">UI Inspiration</h4>
-                                        <p class="text-xs text-zinc-500 mt-1">For The MacOS Style Inspiration</p>
+                                        <h4 class="text-sm font-medium text-zinc-800">UIインスピレーション</h4>
+                                        <p class="text-xs text-zinc-500 mt-1">MacOSスタイルのインスピレーション</p>
                                     </div>
                                 </div>
                                 <a href="https://www.apple.com" target="_blank"
@@ -576,8 +591,8 @@
                                     <img src="https://images.guns.lol/wgdJi.webp" alt="guns.lol"
                                         class="w-6 h-6 rounded-full">
                                     <div>
-                                        <h4 class="text-sm font-medium text-zinc-800">Image Hosting</h4>
-                                        <p class="text-xs text-zinc-500 mt-1">For Hosting Some Icons & Images</p>
+                                        <h4 class="text-sm font-medium text-zinc-800">画像ホスティング</h4>
+                                        <p class="text-xs text-zinc-500 mt-1">一部のアイコンと画像のホスティング</p>
                                     </div>
                                 </div>
                                 <a href="https://guns.lol" target="_blank"
@@ -591,8 +606,8 @@
                                 <div class="flex items-center space-x-3">
                                     <img src="https://lucide.dev/logo.dark.svg" alt="Lucide" class="w-6 h-6">
                                     <div>
-                                        <h4 class="text-sm font-medium text-zinc-800">Lucide Icons</h4>
-                                        <p class="text-xs text-zinc-500 mt-1">For The Beautiful Icons Used In UI</p>
+                                        <h4 class="text-sm font-medium text-zinc-800">Lucideアイコン</h4>
+                                        <p class="text-xs text-zinc-500 mt-1">UIで使用されている美しいアイコン</p>
                                     </div>
                                 </div>
                                 <a href="https://lucide.dev" target="_blank"
@@ -604,15 +619,15 @@
                     </div>
 
                     <div class="space-y-2 mt-6">
-                        <h3 class="text-lg font-medium text-zinc-800 mb-3">Special Thanks</h3>
+                        <h3 class="text-lg font-medium text-zinc-800 mb-3">特別な感謝</h3>
                         <div class="bg-zinc-50/50 rounded-lg p-4 border border-pink-200">
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center space-x-3">
                                     <img src="https://images.guns.lol/ciZSY.webp" alt="q_im"
                                         class="w-6 h-6 rounded-full">
                                     <div>
-                                        <h4 class="text-sm font-medium text-zinc-800">UI Rate</h4>
-                                        <p class="text-xs text-zinc-500 mt-1">For Helping Me With UI & Rate, Thanks!! :D
+                                        <h4 class="text-sm font-medium text-zinc-800">UI評価</h4>
+                                        <p class="text-xs text-zinc-500 mt-1">UIと評価で助けてくれてありがとう！:D
                                         </p>
                                     </div>
                                 </div>
@@ -629,8 +644,8 @@
                                         alt="Girls Can Code" class="w-6 h-6">
                                     <div>
                                         <h4 class="text-sm font-medium text-zinc-800">Girls Can Code!</h4>
-                                        <p class="text-xs text-zinc-500 mt-1">For helping me to learn coding with
-                                            passion! <3< /p>
+                                        <p class="text-xs text-zinc-500 mt-1">情熱を持ってコーディングを学ぶのを
+                                            手伝ってくれてありがとう！<3< /p>
                                     </div>
                                 </div>
                                 <a href="https://girlscancode.fr" target="_blank"
@@ -651,7 +666,7 @@
         <div
             class="bg-white/95 backdrop-blur-md border border-pink-200 rounded-lg shadow-2xl max-w-4xl w-full mx-4 max-h-[80vh] overflow-hidden">
             <div class="bg-zinc-50/70 border-b border-pink-200 px-6 py-4 flex items-center justify-between">
-                <h2 class="text-lg font-medium text-zinc-800">Projects</h2>
+                <h2 class="text-lg font-medium text-zinc-800">プロジェクト</h2>
                 <button onclick="close_projects_modal()" class="text-zinc-600 hover:text-zinc-800 transition-colors">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
@@ -675,13 +690,13 @@
                                     </svg>
                                 </div>
                                 <div>
-                                    <h3 class="text-lg font-medium text-zinc-800">Portfolio Website</h3>
+                                    <h3 class="text-lg font-medium text-zinc-800">ポートフォリオウェブサイト</h3>
                                     <p class="text-sm text-zinc-500">HTML, CSS, JavaScript</p>
                                 </div>
                             </div>
                             <p class="text-sm text-zinc-600 mb-4">
-                                A modern, responsive portfolio website showcasing my skills and projects. Built with
-                                vanilla web technologies and Tailwind CSS.
+                                私のスキルとプロジェクトを紹介するモダンでレスポンシブなポートフォリオウェブサイト。
+                                vanilla web技術とTailwind CSSで構築されています。
                             </p>
                             <div class="flex items-center space-x-2">
                                 <span class="px-2 py-1 bg-orange-500/20 text-orange-400 text-xs rounded-md">HTML</span>
@@ -709,8 +724,8 @@
                                 </div>
                             </div>
                             <p class="text-sm text-zinc-600 mb-4">
-                                A powerful Python-based strong encryption tool with advanced cryptographic algorithms
-                                for secure data protection and file encryption.
+                                高度な暗号化アルゴリズムを使用した強力なPythonベースの暗号化ツール。
+                                安全なデータ保護とファイル暗号化のためのものです。
                             </p>
                             <div class="flex items-center space-x-2">
                                 <span class="px-2 py-1 bg-blue-500/20 text-blue-400 text-xs rounded-md">Python</span>
@@ -737,12 +752,12 @@
                                     <h3 class="text-lg font-medium text-zinc-800">Miraii-AI</h3>
                                     <p class="text-sm text-zinc-500">Python, AI/ML</p>
                                     <span
-                                        class="px-2 py-1 bg-yellow-400/30 text-yellow-600 text-xs rounded-md">WIP</span>
+                                        class="px-2 py-1 bg-yellow-400/30 text-yellow-600 text-xs rounded-md">開発中</span>
                                 </div>
                             </div>
                             <p class="text-sm text-zinc-600 mb-4">
-                                An advanced AI project currently in development. Will feature machine learning
-                                capabilities and intelligent automation systems.
+                                現在開発中の高度なAIプロジェクト。機械学習機能と
+                                インテリジェントな自動化システムを特徴とします。
                             </p>
                             <div class="flex items-center space-x-2">
                                 <span class="px-2 py-1 bg-blue-500/20 text-blue-400 text-xs rounded-md">Python</span>
@@ -754,10 +769,10 @@
                     </div>
 
                     <div class="mt-8 p-4 bg-zinc-50/30 rounded-lg border border-pink-200">
-                        <h3 class="text-lg font-medium text-zinc-800 mb-3">More Projects</h3>
+                        <h3 class="text-lg font-medium text-zinc-800 mb-3">その他のプロジェクト</h3>
                         <p class="text-sm text-zinc-600 mb-4">
-                            I'm constantly working on new projects and learning new technologies. Check out my GitHub
-                            for more of my work!
+                            私は常に新しいプロジェクトに取り組み、新しい技術を学んでいます。
+                            私のGitHubで他の作品もチェックしてください！
                         </p>
                         <a href="https://github.com/its-elizabeth" target="_blank"
                             class="inline-flex items-center space-x-2 px-4 py-2 bg-white/50 hover:bg-zinc-100/50 border border-zinc-300 hover:border-zinc-400 rounded-md text-zinc-600 hover:text-zinc-800 transition-all duration-200">
@@ -765,7 +780,7 @@
                                 <path
                                     d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
                             </svg>
-                            <span>View on GitHub</span>
+                            <span>GitHubで見る</span>
                         </a>
                     </div>
                 </div>
@@ -803,9 +818,9 @@
         function copy_text() {
             if (selected_text) {
                 navigator.clipboard.writeText(selected_text).then(() => {
-                    show_notification("Text copied to clipboard!", "success");
+                    show_notification("テキストをクリップボードにコピーしました！", "success");
                 }).catch(() => {
-                    show_notification("Failed to copy text", "error");
+                    show_notification("テキストのコピーに失敗しました", "error");
                 });
             }
 
@@ -930,7 +945,7 @@
         });
 
         function show_build_info() {
-            const build_info = `By Elizabeth | v1.2.0 | 26/07/2025`;
+            const build_info = `エリザベス作 | v1.2.0 | 2025年7月26日`;
 
             show_notification(build_info, "info", 6000);
             hide_context_menu();
